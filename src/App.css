@@ -17,3 +17,9 @@
 .custom-badge{
   margin: 5px;
 }
+
+.custom-create-post{
+  width: 80%;
+  margin-left: 10%;
+  margin-top: 15px;
+}

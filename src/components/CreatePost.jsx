@@ -2,8 +2,8 @@ import { useContext } from "react"
 import { useRef } from "react"
 import { PostListContext } from "../store/post-list-store"
 
-function CreatePost(){
-  const {addPost} = useContext(PostListContext)
+function CreatePost({setSelectedTab}){
+  const {addPost, } = useContext(PostListContext)
 
   const postTitleElem = useRef()
   const postBodyElem = useRef()
@@ -20,8 +20,14 @@ function CreatePost(){
     const body = postBodyElem.current.value
     const reactions =Math.floor(Math.random()
     * (maxReact - min + 1)) + min
-    // const tags = postTagsElem.current.value.split(/(\s+)/)
     const tags = postTagsElem.current.value.split(" ").map(tag => tag.trim())
+
+    postTitleElem.current.value = ''
+    postBodyElem.current.value = ''
+    postTagsElem.current.value = ''
+
+    setSelectedTab("Home")
+
     addPost(userId, title, body, reactions, tags)
   }
 
@@ -40,7 +46,7 @@ function CreatePost(){
           <label htmlFor="tags" className="form-label">Post Tags</label>
           <input type="text" ref={postTagsElem} placeholder="Enter Post Tags using space..." className="form-control" id="tags" />
         </div>
-        <button type="submit" className="btn btn-primary">Psot</button>
+        <button type="submit" className="btn btn-primary">Post</button>
       </form>
     </>
   )

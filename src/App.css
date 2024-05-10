@@ -9,3 +9,11 @@
 .custom-sidebar{
   min-height: 800px;
 }
+
+.custom-post-card{
+  margin:15px;
+}
+
+.custom-badge{
+  margin: 5px;
+}

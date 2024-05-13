@@ -1,9 +1,12 @@
 import { useContext } from "react"
 import { useRef } from "react"
 import { PostListContext } from "../store/post-list-store"
+import { useEffect } from "react"
+import { useNavigate } from "react-router-dom"
 
 function CreatePost({setSelectedTab}){
   const {addPost, } = useContext(PostListContext)
+  const navigate = useNavigate()
 
   const postTitleElem = useRef()
   const postBodyElem = useRef()
@@ -26,10 +29,25 @@ function CreatePost({setSelectedTab}){
     postBodyElem.current.value = ''
     postTagsElem.current.value = ''
 
-    setSelectedTab("Home")
+    fetch('https://dummyjson.com/posts/add',{
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        title: title,
+        body: body,
+        reactions: reactions,
+        userId: 5,
+        tags: tags,
+      })
+    })
+    .then(res => res.json())
+    .then(post => addPost(post));
 
-    addPost(userId, title, body, reactions, tags)
+    navigate("/")
+
   }
+
+  
 
   return(
     <>

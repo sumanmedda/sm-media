@@ -41,10 +41,7 @@ function CreatePost({setSelectedTab}){
       })
     })
     .then(res => res.json())
-    .then(post => addPost(post));
-
-    navigate("/")
-
+    .then(post => {addPost(post), navigate("/")});
   }
 
   
